@@ -20,7 +20,7 @@ absim = len(demanda[demanda['estatus'] == 'simultáneo'])
 fig_histogram_oferta = px.histogram(oferta, x="adjudicación (%)", title="Distribución de Adjudicación (%)")
 fig_pie_oferta = px.pie(oferta, names='estatus', title='Distribución de Estatus de Oferta')
 
-fig_histogram_demanda = px.histogram(demanda, x="proveedores", title="Distribución de Otra Columna")
+fig_histogram_demanda = px.histogram(demanda, x="otra_columna_existente", title="Distribución de Otra Columna")
 fig_pie_demanda = px.pie(demanda, names='estatus', title='Distribución de Estatus de Demanda')
 
 # Configuración de la página
@@ -54,7 +54,7 @@ with tab2:
     st.header("Oferta")
     st.write(oferta.head())  # Mostrar el DataFrame
     st.write(oferta.info())  # Mostrar el resumen
-
+    
     # Mostrar gráficos interactivos
     st.plotly_chart(fig_histogram_oferta, key="oferta_histogram")
     st.plotly_chart(fig_pie_oferta, key="oferta_pie")
@@ -64,7 +64,7 @@ with tab3:
     st.header("Demanda")
     st.write(demanda.head())  # Mostrar el DataFrame
     st.write(demanda.info())  # Mostrar el resumen
-
+    
     # Mostrar gráficos interactivos
     st.plotly_chart(fig_histogram_demanda, key="demanda_histogram")
     st.plotly_chart(fig_pie_demanda, key="demanda_pie")
