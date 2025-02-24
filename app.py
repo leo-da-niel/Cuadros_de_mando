@@ -31,16 +31,16 @@ tab1, tab2, tab3 = st.tabs(["Resumen de licitación", "Oferta", "Demanda"])
 with tab1:
     st.header("Resumen de licitación")
 
-            col1, col2, col3, col4 = st.columns(4)
+        col1, col2, col3, col4 = st.columns(4)
         col1.metric("TOTAL DE PROPUESTAS", f"{prop}")
-        col2.metric("OFERTAS PARA ANÁLISIS", f"{calcular_sharpe_ratio(returns[selected_asset]):.2f}")
-        col3.metric("ADJUDICADAS", f"{calcular_sortino_ratio(returns[selected_asset]):.2f}")
-        col4.metric("DESIERTAS", f"{calcular_sortino_ratio(returns[selected_asset]):.2f}")
+        col2.metric("OFERTAS PARA ANÁLISIS", f"{of}")
+        col3.metric("ADJUDICADAS", f"{adj}")
+        col4.metric("DESIERTAS", f"{des}")
         
         col5, col6, col7 = st.columns(3)
-        col5.metric("PROPUESTAS EFECTIVAS", f"{var_95:.2%}")
-        col6.metric("SIN OFERTA%", f"{cvar_95:.2%}")
-        col7.metric("ABASTECIMIENTO SIMULTÁNEO", f"{var_95:.2%}")
+        col5.metric("PROPUESTAS EFECTIVAS", f"{efect}")
+        col6.metric("SIN OFERTA%", f"{so}")
+        col7.metric("absim", f"{var_95:.2%}")
 
 
 # Pestaña 2
