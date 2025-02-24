@@ -50,7 +50,14 @@ with tab1:
         col6.metric("SIN OFERTA%", f"{so}")
         col7.metric("SIMULTÁNEAS", f"{absim}")
 
-    # Mostrar gráficos mixtos
+    # Crear un DataFrame con la información
+    resumen_data = {
+        "Métrica": ["TOTAL DE PROPUESTAS", "OFERTAS PARA ANÁLISIS", "ADJUDICADAS", "DESIERTAS", "PROPUESTAS EFECTIVAS", "SIN OFERTA%", "SIMULTÁNEAS"],
+        "Valor": [prop, of, adj, des, efect, so, absim]
+    }
+    resumen_df = pd.DataFrame(resumen_data)
+
+    # Mostrar gráficos 
     st.plotly_chart(fig_histogram_oferta, key="resumen_histogram_oferta")
     st.plotly_chart(fig_pie_oferta, key="resumen_pie_oferta")
     st.plotly_chart(fig_histogram_demanda, key="resumen_histogram_demanda")
