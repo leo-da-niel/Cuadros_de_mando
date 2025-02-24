@@ -40,7 +40,7 @@ with tab1:
     resumen_df = pd.DataFrame(resumen_data)
 
     # Estilizar el DataFrame
-    st.dataframe(resumen_df.style.format({"Valor": "{:.0f}"}).highlight_max(axis=0, color='lightgreen'))
+    st.dataframe(resumen_df.style.format({"Valor": "{:.0f}"}).highlight_max(axis=0, color='gray'))
 
 # Pestaña 2
 with tab2:
