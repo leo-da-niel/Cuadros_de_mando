@@ -39,14 +39,14 @@ with tab1:
     }
     resumen_df = pd.DataFrame(resumen_data)
 
-    # Mostrar la tabla en Streamlit
-    st.table(resumen_df)
+    # Estilizar el DataFrame
+    st.dataframe(resumen_df.style.format({"Valor": "{:.0f}"}).highlight_max(axis=0, color='lightgreen'))
 
 # Pestaña 2
 with tab2:
     st.write(oferta.head())  # Usamos st.write() para mostrar el DataFrame
     st.write(oferta.info())  # Usamos st.write() para mostrar el resumen
-
+    
     # Mostrar el gráfico interactivo en Streamlit con un key único
     st.plotly_chart(fig_histogram, key="oferta_histogram")
     st.plotly_chart(fig_pie, key="oferta_pie")
@@ -55,7 +55,7 @@ with tab2:
 with tab3:
     st.write(demanda.head())  # Usamos st.write() para mostrar el DataFrame
     st.write(demanda.info())  # Usamos st.write() para mostrar el resumen
-
+    
     # Mostrar el gráfico interactivo en Streamlit con un key único
     st.plotly_chart(fig_histogram, key="demanda_histogram")
     st.plotly_chart(fig_pie, key="demanda_pie")
