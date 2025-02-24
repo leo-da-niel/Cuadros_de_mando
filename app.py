@@ -56,6 +56,7 @@ with tab1:
         "Valor": [prop, of, adj, des, efect, so, absim]
     }
     resumen_df = pd.DataFrame(resumen_data)
+    st.dataframe(resumen_df.style.format({"Valor": "{:.0f}"}).highlight_max(axis=0, color='lightgreen'))
 
     # Mostrar gráficos 
     st.plotly_chart(fig_histogram_oferta, key="resumen_histogram_oferta")
