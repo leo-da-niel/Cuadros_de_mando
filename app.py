@@ -20,8 +20,7 @@ absim = len(demanda[demanda['estatus'] == 'simultáneo'])
 fig_histogram = px.histogram(oferta, x="adjudicación (%)")
 
 # Crear un gráfico de pastel con Plotly
-fig_pieO = px.pie(oferta, names='estatus', title='Distribución de Estatus de Oferta')
-fig_pieD = px.pie(demanda, names='estatus', title='Distribución de Estatus de Demanda')
+fig_pie = px.pie(oferta, names='estatus', title='Distribución de Estatus de Oferta')
 
 # Configuración de la página
 st.set_page_config(page_title="Dashboard", layout="wide")
@@ -33,31 +32,30 @@ tab1, tab2, tab3 = st.tabs(["Resumen de licitación", "Oferta", "Demanda"])
 with tab1:
     st.header("Resumen de licitación")
 
-    col1, col2, col3, col4 = st.columns(4)
-    col1.metric("TOTAL DE PROPUESTAS", f"{prop}")
-    col2.metric("OFERTAS PARA ANÁLISIS", f"{of}")
-    col3.metric("ADJUDICADAS", f"{adj}")
-    col4.metric("DESIERTAS", f"{des}")
-        
-    col5, col6, col7 = st.columns(3)
-    col5.metric("PROPUESTAS EFECTIVAS", f"{efect}")
-    col6.metric("SIN OFERTA%", f"{so}")
-    col7.metric("SIMULTÁNEAS", f"{absim}")
+    # Crear un DataFrame con la información
+    resumen_data = {
+        "Métrica": ["TOTAL DE PROPUESTAS", "OFERTAS PARA ANÁLISIS", "ADJUDICADAS", "DESIERTAS", "PROPUESTAS EFECTIVAS", "SIN OFERTA%", "SIMULTÁNEAS"],
+        "Valor": [prop, of, adj, des, efect, so, absim]
+    }
+    resumen_df = pd.DataFrame(resumen_data)
+
+    # Mostrar la tabla en Streamlit
+    st.table(resumen_df)
 
 # Pestaña 2
 with tab2:
     st.write(oferta.head())  # Usamos st.write() para mostrar el DataFrame
     st.write(oferta.info())  # Usamos st.write() para mostrar el resumen
-    
+
     # Mostrar el gráfico interactivo en Streamlit con un key único
     st.plotly_chart(fig_histogram, key="oferta_histogram")
-    st.plotly_chart(fig_pieO, key="oferta_pie")
+    st.plotly_chart(fig_pie, key="oferta_pie")
 
 # Pestaña 3
 with tab3:
     st.write(demanda.head())  # Usamos st.write() para mostrar el DataFrame
     st.write(demanda.info())  # Usamos st.write() para mostrar el resumen
-    
+
     # Mostrar el gráfico interactivo en Streamlit con un key único
     st.plotly_chart(fig_histogram, key="demanda_histogram")
-    st.plotly_chart(fig_pieD, key="demanda_pie")
+    st.plotly_chart(fig_pie, key="demanda_pie")
