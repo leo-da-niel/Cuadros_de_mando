@@ -28,7 +28,7 @@ fig_pie_demanda = px.pie(demanda, names='estatus', title='Distribución de Estat
 st.set_page_config(page_title="Dashboard", layout="wide")
 
 # Incluir imagen como encabezado
-st.image("header.jpg", use_column_width=True)
+st.image("header.png", use_column_width=True)
 
 # Pestañas
 tab1, tab2, tab3 = st.tabs(["Resumen de licitación", "Oferta", "Demanda"])
@@ -88,5 +88,5 @@ with tab3:
     st.write(demanda.head())
 
 # Incluir imagen como pie de página
-st.image("footer.jpg", use_column_width=True)
+st.image("footer.png", use_column_width=True)
 
