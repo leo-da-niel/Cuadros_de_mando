@@ -17,8 +17,9 @@ so = len(demanda[demanda['estatus'] == 'sin oferta'])
 absim = len(demanda[demanda['estatus'] == 'simultáneo'])
 
 # Crear gráficos con Plotly
-fig_histogram_oferta = px.histogram(oferta, x="adjudicación (%)", title="Distribución de Adjudicación (%)")
+fig_histogram_oferta = px.histogram(oferta, x="proveedor", title="Distribución de Adjudicación por Proveedor")
 fig_pie_oferta = px.pie(oferta, names='estatus', title='Distribución de Estatus de Oferta')
+fig_pie_of_ad = px.pie(oferta, names='adjudicación (%)', title='Distribución de Estatus de Oferta')
 
 fig_histogram_demanda = px.histogram(demanda, x="proveedores", title="Distribución de Otra Columna")
 fig_pie_demanda = px.pie(demanda, names='estatus', title='Distribución de Estatus de Demanda')
