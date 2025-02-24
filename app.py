@@ -16,11 +16,12 @@ des = len(demanda[demanda['estatus'] == 'desierta'])
 so = len(demanda[demanda['estatus'] == 'sin oferta'])
 absim = len(demanda[demanda['estatus'] == 'simultáneo'])
 
-# Crear un gráfico de barras con Plotly
-fig_histogram = px.histogram(oferta, x="adjudicación (%)")
+# Crear gráficos con Plotly
+fig_histogram_oferta = px.histogram(oferta, x="adjudicación (%)", title="Distribución de Adjudicación (%)")
+fig_pie_oferta = px.pie(oferta, names='estatus', title='Distribución de Estatus de Oferta')
 
-# Crear un gráfico de pastel con Plotly
-fig_pie = px.pie(oferta, names='estatus', title='Distribución de Estatus de Oferta')
+fig_histogram_demanda = px.histogram(demanda, x="monto", title="Distribución de Monto")
+fig_pie_demanda = px.pie(demanda, names='estatus', title='Distribución de Estatus de Demanda')
 
 # Configuración de la página
 st.set_page_config(page_title="Dashboard", layout="wide")
@@ -28,7 +29,7 @@ st.set_page_config(page_title="Dashboard", layout="wide")
 # Pestañas
 tab1, tab2, tab3 = st.tabs(["Resumen de licitación", "Oferta", "Demanda"])
 
-# Pestaña 1
+# Pestaña 1: Resumen de licitación
 with tab1:
     st.header("Resumen de licitación")
 
@@ -39,23 +40,31 @@ with tab1:
     }
     resumen_df = pd.DataFrame(resumen_data)
 
-    # Estilizar el DataFrame
-    st.dataframe(resumen_df.style.format({"Valor": "{:.0f}"}).highlight_max(axis=0, color='gray'))
+    # Mostrar la tabla en Streamlit
+    st.dataframe(resumen_df.style.format({"Valor": "{:.0f}"}).highlight_max(axis=0, color='lightgreen'))
 
-# Pestaña 2
+    # Mostrar gráficos mixtos
+    st.plotly_chart(fig_histogram_oferta, key="resumen_histogram_oferta")
+    st.plotly_chart(fig_pie_oferta, key="resumen_pie_oferta")
+    st.plotly_chart(fig_histogram_demanda, key="resumen_histogram_demanda")
+    st.plotly_chart(fig_pie_demanda, key="resumen_pie_demanda")
+
+# Pestaña 2: Oferta
 with tab2:
-    st.write(oferta.head())  # Usamos st.write() para mostrar el DataFrame
-    st.write(oferta.info())  # Usamos st.write() para mostrar el resumen
+    st.header("Oferta")
+    st.write(oferta.head())  # Mostrar el DataFrame
+    st.write(oferta.info())  # Mostrar el resumen
     
-    # Mostrar el gráfico interactivo en Streamlit con un key único
-    st.plotly_chart(fig_histogram, key="oferta_histogram")
-    st.plotly_chart(fig_pie, key="oferta_pie")
+    # Mostrar gráficos interactivos
+    st.plotly_chart(fig_histogram_oferta, key="oferta_histogram")
+    st.plotly_chart(fig_pie_oferta, key="oferta_pie")
 
-# Pestaña 3
+# Pestaña 3: Demanda
 with tab3:
-    st.write(demanda.head())  # Usamos st.write() para mostrar el DataFrame
-    st.write(demanda.info())  # Usamos st.write() para mostrar el resumen
+    st.header("Demanda")
+    st.write(demanda.head())  # Mostrar el DataFrame
+    st.write(demanda.info())  # Mostrar el resumen
     
-    # Mostrar el gráfico interactivo en Streamlit con un key único
-    st.plotly_chart(fig_histogram, key="demanda_histogram")
-    st.plotly_chart(fig_pie, key="demanda_pie")
+    # Mostrar gráficos interactivos
+    st.plotly_chart(fig_histogram_demanda, key="demanda_histogram")
+    st.plotly_chart(fig_pie_demanda, key="demanda_pie")
