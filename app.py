@@ -72,16 +72,19 @@ with tab2:
     col2.metric("OFERTAS PARA ANÁLISIS", f"{of}")
     col3.metric("PROPUESTAS EFECTIVAS", f"{efect}")
     
-    st.header("Oferta")
-    st.write(oferta.head())
-    
     # Mostrar gráficos interactivos
     st.plotly_chart(fig_histogram_oferta, key="oferta_histogram")
     st.plotly_chart(fig_pie_oferta, key="oferta_pie")
     st.plotly_chart(fig_hist_of_ad, key="oferta_hist_of_ad")
 
+    st.header("Oferta")
+    st.write(oferta.head())
+
 # Pestaña 3: Demanda
 with tab3:
+    st.header("Demanda")
+    st.write(demanda.head())
+    
     col4, col5, col6, col7 = st.columns(4)
     col4.metric("ADJUDICADAS", f"{adj}")
     col5.metric("SIN OFERTA", f"{so}")
@@ -92,8 +95,7 @@ with tab3:
     st.plotly_chart(fig_histogram_demanda, key="demanda_histogram")
     st.plotly_chart(fig_pie_demanda, key="demanda_pie")
 
-    st.header("Demanda")
-    st.write(demanda.head())
+
 
 # Incluir imagen como pie de página
 st.image("footer.png", use_container_width=True)
