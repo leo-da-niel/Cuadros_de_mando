@@ -20,7 +20,8 @@ absim = len(demanda[demanda['estatus'] == 'simultáneo'])
 fig_histogram = px.histogram(oferta, x="adjudicación (%)")
 
 # Crear un gráfico de pastel con Plotly
-fig_pie = px.pie(oferta, names='estatus', title='Distribución de Estatus de Oferta')
+fig_pieO = px.pie(oferta, names='estatus', title='Distribución de Estatus de Oferta')
+fig_pieD = px.pie(demanda, names='estatus', title='Distribución de Estatus de Demanda')
 
 # Configuración de la página
 st.set_page_config(page_title="Dashboard", layout="wide")
@@ -50,7 +51,7 @@ with tab2:
     
     # Mostrar el gráfico interactivo en Streamlit con un key único
     st.plotly_chart(fig_histogram, key="oferta_histogram")
-    st.plotly_chart(fig_pie, key="oferta_pie")
+    st.plotly_chart(fig_pieO, key="oferta_pie")
 
 # Pestaña 3
 with tab3:
@@ -59,4 +60,4 @@ with tab3:
     
     # Mostrar el gráfico interactivo en Streamlit con un key único
     st.plotly_chart(fig_histogram, key="demanda_histogram")
-    st.plotly_chart(fig_pie, key="demanda_pie")
+    st.plotly_chart(fig_pieD, key="demanda_pie")
