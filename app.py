@@ -42,7 +42,7 @@ with tab1:
     resumen_df = pd.DataFrame(resumen_data)
 
     # Mostrar la tabla en Streamlit
-    st.dataframe(resumen_df.style.format({"Valor": "{:.0f}"}))
+    st.table(resumen_df.style.format({"Valor": "{:.0f}"}))
 
     # Mostrar gráficos mixtos
     st.plotly_chart(fig_histogram_oferta, key="resumen_histogram_oferta")
@@ -70,7 +70,7 @@ with tab2:
 with tab3:
     col4, col5, col6, col7 = st.columns(4)
     col4.metric("ADJUDICADAS", f"{adj}")
-    col5.metric("SIN OFERTA%", f"{so}")
+    col5.metric("SIN OFERTA", f"{so}")
     col6.metric("DESIERTAS", f"{des}")
     col7.metric("SIMULTÁNEAS", f"{absim}")
 
