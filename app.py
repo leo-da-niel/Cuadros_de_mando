@@ -20,8 +20,7 @@ absim = len(demanda[demanda['estatus'] == 'simultáneo'])
 fig_histogram_oferta = px.histogram(oferta, x="adjudicación (%)", title="Distribución de Adjudicación (%)")
 fig_pie_oferta = px.pie(oferta, names='estatus', title='Distribución de Estatus de Oferta')
 
-# Ajustar la columna para el gráfico de demanda
-fig_histogram_demanda = px.histogram(demanda, x="otra_columna_existente", title="Distribución de Otra Columna")
+fig_histogram_demanda = px.histogram(demanda, x="proveedores", title="Distribución de Otra Columna")
 fig_pie_demanda = px.pie(demanda, names='estatus', title='Distribución de Estatus de Demanda')
 
 # Configuración de la página
