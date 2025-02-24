@@ -35,16 +35,20 @@ with tab1:
     st.header("Resumen de licitación")
 
     # Crear un DataFrame con la información
-    resumen_data = {
-        "Métrica": ["TOTAL DE PROPUESTAS", "OFERTAS PARA ANÁLISIS", "ADJUDICADAS", "DESIERTAS", "PROPUESTAS EFECTIVAS", "SIN OFERTA%", "SIMULTÁNEAS"],
-        "Valor": [prop, of, adj, des, efect, so, absim]
-    }
-    resumen_df = pd.DataFrame(resumen_data)
+    with st.container():
+        col1, col2, col3, col4 = st.columns(4)
+        col1.metric("TOTAL DE PROPUESTAS", f"{prop}")
+        col2.metric("OFERTAS PARA ANÁLISIS", f"{of}")
+        col3.metric("ADJUDICADAS", f"{adj}")
+        col4.metric("DESIERTAS", f"{des}")
+        
+        col5, col6, col7 = st.columns(3)
+        col5.metric("PROPUESTAS EFECTIVAS", f"{efect}")
+        col6.metric("SIN OFERTA%", f"{so}")
+        col7.metric("SIMULTÁNEAS", f"{absim}")
 
     # Mostrar la tabla en Streamlit
-    st.table(resumen_df.style.format({"Valor": "{:.0f}"}))
 
-    # Mostrar gráficos mixtos
     st.plotly_chart(fig_histogram_oferta, key="resumen_histogram_oferta")
     st.plotly_chart(fig_pie_oferta, key="resumen_pie_oferta")
     st.plotly_chart(fig_histogram_demanda, key="resumen_histogram_demanda")
