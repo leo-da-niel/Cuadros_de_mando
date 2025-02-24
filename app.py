@@ -19,7 +19,7 @@ absim = len(demanda[demanda['estatus'] == 'simultáneo'])
 # Crear gráficos con Plotly
 fig_histogram_oferta = px.histogram(oferta, x="proveedor", title="Distribución de Adjudicación por Proveedor")
 fig_pie_oferta = px.pie(oferta, names='estatus', title='Distribución de Estatus de Oferta')
-fig_pie_of_ad = px.pie(oferta, names='adjudicación (%)', title='Distribución de Estatus de Oferta')
+fig_hist_of_ad = px.histogram(oferta, names='adjudicación (%)', title='Distribución de Estatus de Oferta')
 
 fig_histogram_demanda = px.histogram(demanda, x="proveedores", title="Distribución de Otra Columna")
 fig_pie_demanda = px.pie(demanda, names='estatus', title='Distribución de Estatus de Demanda')
@@ -48,7 +48,8 @@ with tab1:
     st.plotly_chart(fig_histogram_oferta, key="resumen_histogram_oferta")
     st.plotly_chart(fig_pie_oferta, key="resumen_pie_oferta")
     st.plotly_chart(fig_histogram_demanda, key="resumen_histogram_demanda")
-    st.plotly_chart(fig_pie_demanda, key="resumen_pie_demanda")
+    st.plotly_chart(fig_pie_demanda, key="resumen_pie_demanda") 
+    st.plotly_chart(fig_hist_of_ad, key="Adjudicación por proveedor")
 
 # Pestaña 2: Oferta
 with tab2:
@@ -63,6 +64,7 @@ with tab2:
     # Mostrar gráficos interactivos
     st.plotly_chart(fig_histogram_oferta, key="oferta_histogram")
     st.plotly_chart(fig_pie_oferta, key="oferta_pie")
+    st.plotly_chart(fig_hist_of_ad, key="Adjudicación por proveedor")
 
 # Pestaña 3: Demanda
 with tab3:
