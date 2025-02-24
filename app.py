@@ -16,8 +16,8 @@ des = len(demanda[demanda['estatus'] == 'desierta'])
 so = len(demanda[demanda['estatus'] == 'sin oferta'])
 absim = len(demanda[demanda['estatus'] == 'simultáneo'])
 
-# Crear gráficos con Plotly
-fig_histogram_oferta = px.histogram(oferta, x="proveedor", title="Distribución de Adjudicación por Proveedor")
+# Gráficos 
+fig_histogram_oferta = px.histogram(oferta, x="proveedor", title="Distribución de Adjudicaciones por Proveedor")
 fig_pie_oferta = px.pie(oferta, names='estatus', title='Distribución de Estatus de Oferta')
 fig_hist_of_ad = px.histogram(oferta, x='adjudicación (%)', title='Distribución de Adjudicación (%)')
 
@@ -73,10 +73,11 @@ with tab3:
     col5.metric("SIN OFERTA%", f"{so}")
     col6.metric("DESIERTAS", f"{des}")
     col7.metric("SIMULTÁNEAS", f"{absim}")
-    
+
+    st.header("Demanda")
+    st.write(demanda.head())
+
     # Mostrar gráficos interactivos
     st.plotly_chart(fig_histogram_demanda, key="demanda_histogram")
     st.plotly_chart(fig_pie_demanda, key="demanda_pie")
 
-    st.header("Demanda")
-    st.write(demanda.head())
