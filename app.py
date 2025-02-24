@@ -41,7 +41,7 @@ with tab1:
     resumen_df = pd.DataFrame(resumen_data)
 
     # Mostrar la tabla en Streamlit
-    st.dataframe(resumen_df.style.format({"Valor": "{:.0f}"}).highlight_max(axis=0, color='lightgreen'))
+    st.dataframe(resumen_df.style.format({"Valor": "{:.0f}"}))
 
     # Mostrar gráficos mixtos
     st.plotly_chart(fig_histogram_oferta, key="resumen_histogram_oferta")
@@ -57,8 +57,7 @@ with tab2:
     col3.metric("PROPUESTAS EFECTIVAS", f"{efect}")
     
     st.header("Oferta")
-    st.write(oferta.head())  # Mostrar el DataFrame
-    st.write(oferta.info())  # Mostrar el resumen
+    st.write(oferta.head())
     
     # Mostrar gráficos interactivos
     st.plotly_chart(fig_histogram_oferta, key="oferta_histogram")
@@ -74,8 +73,7 @@ with tab3:
 
 
     st.header("Demanda")
-    st.write(demanda.head())  # Mostrar el DataFrame
-    st.write(demanda.info())  # Mostrar el resumen
+    st.write(demanda.head())
     
     # Mostrar gráficos interactivos
     st.plotly_chart(fig_histogram_demanda, key="demanda_histogram")
