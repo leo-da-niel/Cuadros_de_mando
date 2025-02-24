@@ -1,15 +1,57 @@
-streamlit.errors.StreamlitDuplicateElementId: This app has encountered an error. The original error message is redacted to prevent data leaks. Full error details have been recorded in the logs (if you're on Streamlit Cloud, click on 'Manage app' in the lower right of your app).
+import streamlit as st
+import pandas as pd
+import plotly.express as px  # Importar plotly para los gráficos interactivos
 
-Traceback:
-File "/mount/src/cuadros_de_mando/app.py", line 55, in <module>
-    st.plotly_chart(fig)
-File "/home/adminuser/venv/lib/python3.12/site-packages/streamlit/runtime/metrics_util.py", line 410, in wrapped_func
-    result = non_optional_func(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-File "/home/adminuser/venv/lib/python3.12/site-packages/streamlit/elements/plotly_chart.py", line 509, in plotly_chart
-    plotly_chart_proto.id = compute_and_register_element_id(
-                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-File "/home/adminuser/venv/lib/python3.12/site-packages/streamlit/elements/lib/utils.py", line 225, in compute_and_register_element_id
-    _register_element_id(ctx, element_type, element_id)
-File "/home/adminuser/venv/lib/python3.12/site-packages/streamlit/elements/lib/utils.py", line 131, in _register_element_id
-    raise StreamlitDuplicateElementId(element_type)
+# Leer datos
+oferta = pd.read_csv("dash.csv", encoding='latin-1', index_col='propuesta')
+demanda = pd.read_csv("board.csv", encoding='latin-1', index_col='partida')
+
+# Variables
+prop = oferta['clave'].nunique()
+of = len(oferta[oferta['estatus'] != 'no procedente'])
+efect = len(oferta[oferta['estatus'] != 'no procedente'])
+
+adj = len(demanda[demanda['estatus'].isin(['único', 'simultáneo'])])
+des = len(demanda[demanda['estatus'] == 'desierta'])
+so = len(demanda[demanda['estatus'] == 'sin oferta'])
+absim = len(demanda[demanda['estatus'] == 'simultáneo'])
+
+# Crear un gráfico con Plotly (por ejemplo, un gráfico de barras de la adjudicación)
+fig = px.histogram(oferta, x="adjudicación (%)")
+
+# Configuración de la página
+st.set_page_config(page_title="Dashboard", layout="wide")
+
+# Pestañas
+tab1, tab2, tab3 = st.tabs(["Resumen de licitación", "Oferta", "Demanda"])
+
+# Pestaña 1
+with tab1:
+    st.header("Resumen de licitación")
+
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("TOTAL DE PROPUESTAS", f"{prop}")
+    col2.metric("OFERTAS PARA ANÁLISIS", f"{of}")
+    col3.metric("ADJUDICADAS", f"{adj}")
+    col4.metric("DESIERTAS", f"{des}")
+        
+    col5, col6, col7 = st.columns(3)
+    col5.metric("PROPUESTAS EFECTIVAS", f"{efect}")
+    col6.metric("SIN OFERTA%", f"{so}")
+    col7.metric("SIMULTÁNEAS", f"{absim}")
+
+# Pestaña 2
+with tab2:
+    st.write(oferta.head())  # Usamos st.write() para mostrar el DataFrame
+    st.write(oferta.info())  # Usamos st.write() para mostrar el resumen
+    
+    # Mostrar el gráfico interactivo en Streamlit con un key único
+    st.plotly_chart(fig, key="oferta_chart")
+
+# Pestaña 3
+with tab3:
+    st.write(demanda.head())  # Usamos st.write() para mostrar el DataFrame
+    st.write(demanda.info())  # Usamos st.write() para mostrar el resumen
+    
+    # Mostrar el gráfico interactivo en Streamlit con un key único
+    st.plotly_chart(fig, key="demanda_chart")
