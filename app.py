@@ -16,8 +16,11 @@ des = len(demanda[demanda['estatus'] == 'desierta'])
 so = len(demanda[demanda['estatus'] == 'sin oferta'])
 absim = len(demanda[demanda['estatus'] == 'simultáneo'])
 
-# Crear un gráfico con Plotly (por ejemplo, un gráfico de barras de la adjudicación)
-fig = px.histogram(oferta, x="adjudicación (%)")
+# Crear un gráfico de barras con Plotly
+fig_histogram = px.histogram(oferta, x="adjudicación (%)")
+
+# Crear un gráfico de pastel con Plotly
+fig_pie = px.pie(oferta, names='estatus', title='Distribución de Estatus de Oferta')
 
 # Configuración de la página
 st.set_page_config(page_title="Dashboard", layout="wide")
@@ -46,7 +49,8 @@ with tab2:
     st.write(oferta.info())  # Usamos st.write() para mostrar el resumen
     
     # Mostrar el gráfico interactivo en Streamlit con un key único
-    st.plotly_chart(fig, key="oferta_chart")
+    st.plotly_chart(fig_histogram, key="oferta_histogram")
+    st.plotly_chart(fig_pie, key="oferta_pie")
 
 # Pestaña 3
 with tab3:
@@ -54,4 +58,5 @@ with tab3:
     st.write(demanda.info())  # Usamos st.write() para mostrar el resumen
     
     # Mostrar el gráfico interactivo en Streamlit con un key único
-    st.plotly_chart(fig, key="demanda_chart")
+    st.plotly_chart(fig_histogram, key="demanda_histogram")
+    st.plotly_chart(fig_pie, key="demanda_pie")
