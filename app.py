@@ -39,7 +39,7 @@ clave_options = {
     "c",
     "d"
 }
-clave_input = st.sidebar.selectbox("Ingrese la clave o claves separadas por coma", list(clave_options.keys())
+clave_input = st.sidebar.selectbox("Ingrese la clave o claves separadas por coma", list(clave_options.keys()))
 cl = [s.strip() for s in simbolos_input.split(',')]
 
 instituto_options = {
@@ -48,7 +48,7 @@ instituto_options = {
     "issste",
     "pemex"
 }
-selected_instituto = st.sidebar.selectbox("Ingrese el Instituo:", list(instituto_options.keys())
+selected_instituto = st.sidebar.selectbox("Ingrese el Instituo:", list(instituto_options.keys()))
 inst = instituto_options[selected_instituto]
 
 proveedor_options = {
@@ -57,7 +57,7 @@ proveedor_options = {
     "y",
     "z"
 }
-selected_proveedor = st.sidebar.selectbox("Ingrese el proveedor", list(proveedor_options.keys())
+selected_proveedor = st.sidebar.selectbox("Ingrese el proveedor", list(proveedor_options.keys()))
 prov = proveedor_options[selected_proveedor]
 
 status_options = {
@@ -66,14 +66,14 @@ status_options = {
     "Abastecimiento Simultáneo" : "simultáneo",
     "Sin Oferta" ; "sin oferta"
 }
-selected_status = st.sidebar.selectbox("Ingrese el estatus", list(estatus_options.keys())
+selected_status = st.sidebar.selectbox("Ingrese el estatus", list(estatus_options.keys()))
 stat = status_options[selected_status]
 
 type_options = {
     "Medicamento",
     "Material de Curación"
 }
-selected_type = st.sidebar.selectbox("Ingrese el tipo de clave", list(type_options.keys())
+selected_type = st.sidebar.selectbox("Ingrese el tipo de clave", list(type_options.keys()))
 ty = type_options[selected_type]
 
 
