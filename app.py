@@ -30,7 +30,8 @@ st.set_page_config(page_title="Dashboard", layout="wide")
 # Incluir imagen como encabezado
 st.image("header.png", use_container_width=True)
 
-
+st.set_page_config(page_title="Resumen deLicitación", layout="wide")
+st.sidebar.title("Ingrese la Clave, Instituto o Proveedor")
 # Entrada de símbolos y pesos
 clave_options = {
     "a",
