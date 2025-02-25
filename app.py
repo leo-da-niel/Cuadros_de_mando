@@ -64,7 +64,7 @@ status_options = {
     "Desiertas" : "desierta",
     "Adjudicación Única" : "único",
     "Abastecimiento Simultáneo" : "simultáneo",
-    "Sin Oferta" ; "sin oferta"
+    "Sin Oferta" : "sin oferta"
 }
 selected_status = st.sidebar.selectbox("Ingrese el estatus", list(estatus_options.keys()))
 stat = status_options[selected_status]
