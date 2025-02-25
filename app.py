@@ -30,6 +30,53 @@ st.set_page_config(page_title="Dashboard", layout="wide")
 # Incluir imagen como encabezado
 st.image("header.png", use_container_width=True)
 
+
+# Entrada de símbolos y pesos
+clave_options = {
+    "a",
+    "b",
+    "c",
+    "d"
+}
+clave_input = st.sidebar.text_input("Ingrese la clave o claves separadas por coma", list(clave_options.keys())
+cl = [s.strip() for s in simbolos_input.split(',')]
+
+instituto_options = {
+    "imss",
+    "imssbienestar",
+    "issste",
+    "pemex"
+}
+selected_instituto = st.sidebar.selectbox("Ingrese el Instituo:", list(instituto_options.keys())
+inst = instituto_options[selected_instituto]
+
+proveedor_options = {
+    "w",
+    "x",
+    "y",
+    "z"
+}
+selected_proveedor = st.sidebar.selectbox("Ingrese el proveedor", list(proveedor_options.keys())
+prov = proveedor_options[selected_proveedor]
+
+status_options = {
+    "Desiertas" : "desierta",
+    "Adjudicación Única" : "único",
+    "Abastecimiento Simultáneo" : "simultáneo",
+    "Sin Oferta" ; "sin oferta"
+}
+selected_status = st.sidebar.selectbox("Ingrese el estatus", list(estatus_options.keys())
+stat = status_options[selected_status]
+
+type_options = {
+    "Medicamento",
+    "Material de Curación"
+}
+selected_type = st.sidebar.selectbox("Ingrese el tipo de clave", list(type_options.keys())
+ty = type_options[selected_type]
+
+
+
 # Pestañas
 tab1, tab2, tab3 = st.tabs(["Resumen de licitación", "Oferta", "Demanda"])
 
