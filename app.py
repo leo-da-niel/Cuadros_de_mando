@@ -38,7 +38,7 @@ clave_options = {
     "c",
     "d"
 }
-clave_input = st.sidebar.text_input("Ingrese la clave o claves separadas por coma", list(clave_options.keys())
+clave_input = st.sidebar.selectbox("Ingrese la clave o claves separadas por coma", list(clave_options.keys())
 cl = [s.strip() for s in simbolos_input.split(',')]
 
 instituto_options = {
